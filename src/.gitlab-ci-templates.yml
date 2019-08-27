@@ -1,0 +1,19 @@
+image: registry.gitlab.com/singletonsd/docker/gitlab-ci-validator/alpine-3.9:latest
+
+include:
+  - project: 'singletonsd/pipelines/common'
+    file: '/src/.gitlab-ci-pages.yml'
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  before_script:
+    - apk add --no-cache bash curl
+  script:
+    - mkdir -p binaries
+    - curl -o binaries/gitlab-ci_lint_test_standalone.sh -L https://singletonsd.gitlab.io/scripts/gitlab-ci/latest/gitlab-ci_lint_test_standalone.sh
+    - chmod +x binaries/gitlab-ci_lint_test_standalone.sh
+    - ./binaries/gitlab-ci_lint_test_standalone.sh

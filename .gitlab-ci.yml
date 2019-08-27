@@ -1,0 +1,41 @@
+image: registry.gitlab.com/singletonsd/docker/gitlab-ci-validator/alpine-3.9:latest
+
+stages:
+  - test
+  - deploy
+
+test:main:
+  stage: test
+  script:
+    - gitlab  src/.gitlab-ci-main.yml
+
+test:common:
+  stage: test
+  script:
+    - gitlab  src/.gitlab-ci-common.yml
+
+test:test-dynamic:
+  stage: test
+  script:
+    - gitlab  src/.gitlab-ci-test-dynamic.yml
+
+test:test-static:
+  stage: test
+  script:
+    - gitlab  src/.gitlab-ci-test-static.yml
+
+pages:
+  stage: deploy
+  before_script:
+    - if [ "${CI_COMMIT_REF_NAME}" == "master" ]; then
+        export TARGET_FOLDER=public/latest;
+      else
+        export TARGET_FOLDER=public/${CI_COMMIT_REF_NAME};
+      fi
+  script:
+    - rm -rf "${TARGET_FOLDER}"
+    - mkdir -p "${TARGET_FOLDER}"
+    - cp -r src/.g* "${TARGET_FOLDER}"
+  artifacts:
+    paths:
+      - public
