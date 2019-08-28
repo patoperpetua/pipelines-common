@@ -4,6 +4,9 @@ include:
   - project: 'singletonsd/pipelines/common'
     file: '/src/.gitlab-ci-pages.yml'
 
+variables:
+  PAGES_SOURCE_FOLDER: "src/.g*"
+
 stages:
   - test
   - deploy
@@ -17,3 +20,6 @@ test:
     - curl -o binaries/gitlab-ci_lint_test_standalone.sh -L https://singletonsd.gitlab.io/scripts/gitlab-ci/latest/gitlab-ci_lint_test_standalone.sh
     - chmod +x binaries/gitlab-ci_lint_test_standalone.sh
     - ./binaries/gitlab-ci_lint_test_standalone.sh
+    - if [ -d "examples" ]; then
+        ./binaries/gitlab-ci_lint_test_standalone.sh -o=examples;
+      fi

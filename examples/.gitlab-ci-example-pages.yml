@@ -1,0 +1,10 @@
+include:
+  - project: 'singletonsd/pipelines/common'
+    file: '/src/.gitlab-ci-pages.yml'
+
+variables:
+  PAGES_TARGET_FOLDER: ""
+  PAGES_SOURCE_FOLDER: ""
+
+stages:
+  - deploy

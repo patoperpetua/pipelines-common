@@ -37,6 +37,12 @@ There are 3 files:
 
 ### USE
 
+If you want to skip reading, you can copy and paste one of the following links and setup the variables:
+
+- [Pages](https://gitlab.com/singletonsd/pipelines/common/raw/master/examples/.gitlab-ci-example-pages.yml)
+- [Scripts](https://gitlab.com/singletonsd/pipelines/common/raw/master/examples/.gitlab-ci-example-scripts.yml)
+- [Templates](https://gitlab.com/singletonsd/pipelines/common/raw/master/examples/.gitlab-ci-example-templates.yml)
+
 To use it, you can include them as following (using repository aproach):
 
 ```yaml
@@ -120,10 +126,11 @@ curl -o gitlab-ci_lint_test_standalone.sh -L https://singletonsd.gitlab.io/scrip
 
 ## TODO
 
-- [ ] Add pages template.
-- [ ] Add script template.
-- [ ] Add template template.
+- [X] Add pages template.
+- [X] Add script template.
+- [X] Add template template.
 - [ ] Fix documentation.
+- [X] Add examples.
 
 ----------------------
 

@@ -2,6 +2,7 @@ image: alpine:3.7
 
 variables:
   PAGES_TARGET_FOLDER: "public"
+  PAGES_SOURCE_FOLDER: "src/*"
 
 include:
   - project: 'singletonsd/pipelines/common'

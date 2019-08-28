@@ -2,6 +2,7 @@ image: registry.gitlab.com/singletonsd/docker/gitlab-ci-validator/alpine-3.9:lat
 
 variables:
   PAGES_TARGET_FOLDER: "public"
+  PAGES_SOURCE_FOLDER: "dist"
 
 stages:
   - deploy
@@ -17,7 +18,7 @@ pages:
   script:
     - rm -rf "${TARGET_FOLDER}"
     - mkdir -p "${TARGET_FOLDER}"
-    - cp -r src/.g* "${TARGET_FOLDER}"
+    - cp -r ${PAGES_SOURCE_FOLDER} "${TARGET_FOLDER}"
   artifacts:
     paths:
       - public
