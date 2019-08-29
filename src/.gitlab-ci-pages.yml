@@ -1,4 +1,4 @@
-image: registry.gitlab.com/singletonsd/docker/gitlab-ci-validator/alpine-3.9:latest
+image: alpine:3.9
 
 variables:
   PAGES_TARGET_FOLDER: "public"
