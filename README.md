@@ -13,7 +13,9 @@ There are 3 files:
     - *PAGES_TARGET_FOLDER:* "public"
     - *PAGES_SOURCE_FOLDER:* "dist"
 
-- **scripts:** contains jobs to test bash scripts and publish them to gitlab pages as single file and inside a zip file.
+- **scripts:** contains jobs to test bash scripts and publish them to gitlab pages as single file and inside a zip file. It has the following available variables:
+  - *SCRIPTS_SKIP_TEST*: ""
+  - *SCRIPTS_SKIP_ZIP*: ""
 
 - **templates:** contains jobs to test gitlab-ci templates and publish them to gitlab pages.
 
@@ -31,56 +33,59 @@ To use it, you can include them as following (using repository aproach):
 
 ```yaml
 include:
-  # The main files contains includes all files
-  - project: 'singletonsd/pipelines/npm'
-    file: '/src/.gitlab-ci-main.yml'
 
-  # Or you can include each file by your self.
-  - project: 'singletonsd/pipelines/npm'
-    file: '/src/.gitlab-ci-common.yml'
-  - project: 'singletonsd/pipelines/npm'
-    file: '/src/.gitlab-ci-test-dynamic.yml'
-  - project: 'singletonsd/pipelines/npm'
-    file: '/src/.gitlab-ci-static.yml'
+  - project: 'singletonsd/pipelines/common'
+    file: '/src/.gitlab-ci-pages.yml'
+  - project: 'singletonsd/pipelines/common'
+    file: '/src/.gitlab-ci-test-scripts.yml'
+  - project: 'singletonsd/pipelines/common'
+    file: '/src/.gitlab-ci-templates.yml'
 ```
 
 Or using remote aproach over gitlab repo:
 
 ```yaml
 include:
-  - remote: 'https://gitlab.com/singletonsd/pipelines/npm/raw/master/src/.gitlab-ci-main.yml'
-  - remote: 'https://gitlab.com/singletonsd/pipelines/npm/raw/master/src/.gitlab-ci-common.yml'
-  - remote: 'https://gitlab.com/singletonsd/pipelines/npm/raw/master/src/.gitlab-ci-test-dynamic.yml'
-  - remote: 'https://gitlab.com/singletonsd/pipelines/npm/raw/master/src/.gitlab-ci-test-static.yml'
+  - remote: 'https://gitlab.com/singletonsd/pipelines/common/raw/master/src/.gitlab-ci-pages.yml'
+  - remote: 'https://gitlab.com/singletonsd/pipelines/common/raw/master/src/.gitlab-ci-scripts.yml'
+  - remote: 'https://gitlab.com/singletonsd/pipelines/common/raw/master/src/.gitlab-ci-test-templates.yml'
 ```
 
 Or using remote aproach over gilab pages:
 
 ```yaml
 include:
-  - remote: 'https://singletonsd.gitlab.io/pipelines/npm/latest/.gitlab-ci-main.yml'
-  - remote: 'https://singletonsd.gitlab.io/pipelines/npm/latest/.gitlab-ci-common.yml'
-  - remote: 'https://singletonsd.gitlab.io/singletonsd/pipelines/npm/latest/.gitlab-ci-test-dynamic.yml'
-  - remote: 'https://singletonsd.gitlab.io/singletonsd/pipelines/npm/latest/.gitlab-ci-test-static.yml'
+  - remote: 'https://singletonsd.gitlab.io/pipelines/common/latest/.gitlab-ci-pages.yml'
+  - remote: 'https://singletonsd.gitlab.io/pipelines/common/latest/.gitlab-ci-scripts.yml'
+  - remote: 'https://singletonsd.gitlab.io/singletonsd/pipelines/common/latest/.gitlab-ci-test-templates.yml'
 ```
 
 Master branch is setup as latest folder. To use an specific version, put the version name before the file name like:
 
 ```yaml
 include:
-  - remote: 'https://singletonsd.gitlab.io/pipelines/npm/1.0.0/.gitlab-ci-main.yml'
-  - remote: 'https://singletonsd.gitlab.io/singletonsd/pipelines/npm/develop/.gitlab-ci-test-dynamic.yml'
-  - remote: 'https://singletonsd.gitlab.io/singletonsd/pipelines/npm/feature-new/.gitlab-ci-test-static.yml'
+  - remote: 'https://singletonsd.gitlab.io/pipelines/common/1.0.0/.gitlab-ci-${FILE}.yml'
+  - remote: 'https://singletonsd.gitlab.io/singletonsd/pipelines/common/develop/.gitlab-ci-${FILE}.yml'
+  - remote: 'https://singletonsd.gitlab.io/singletonsd/pipelines/common/feature-new/.gitlab-ci-test-${FILE}.yml'
 ```
 
 And also define the stages you want to use. It can be both or just one. Remember to include the one you want or main if you use both, like following:
 
 ```yaml
+# Pages
 stages:
-  - install
-  - test_static
+  - deploy
+
+# Scripts
+stages:
+  - test
   - build
-  - test_dynamic
+  - deploy
+
+# Templates
+stages:
+  - test
+  - deploy
 ```
 
 ### TEST

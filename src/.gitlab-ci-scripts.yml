@@ -5,6 +5,8 @@ variables:
   SCRIPTS_IMAGE_TAG: "3.9"
   PAGES_TARGET_FOLDER: "public"
   PAGES_SOURCE_FOLDER: "src/*"
+  SCRIPTS_SKIP_TEST: ""
+  SCRIPTS_SKIP_ZIP: ""
 
 include:
   - project: 'singletonsd/pipelines/common'
@@ -25,6 +27,9 @@ test:
     - curl -o binaries/bash_script_test_standalone.sh -L https://singletonsd.gitlab.io/scripts/common/latest/bash_script_test_standalone.sh
     - chmod +x binaries/bash_script_test_standalone.sh
     - ./binaries/bash_script_test_standalone.sh
+  except:
+    variables:
+      - $SCRIPTS_SKIP_TEST == "true"
 
 zip:
   stage: build
@@ -42,6 +47,9 @@ zip:
     - ./binaries/zip_files.sh
     - mkdir -p "${TARGET_FOLDER}"
     - ./binaries/zip_files.sh
+  except:
+    variables:
+      - $SCRIPTS_SKIP_ZIP == "true"
   artifacts:
     paths:
       - public
