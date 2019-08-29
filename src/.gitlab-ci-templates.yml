@@ -1,10 +1,12 @@
-image: registry.gitlab.com/singletonsd/docker/gitlab-ci-validator/alpine-3.9:latest
+image: ${TEMPLATES_IMAGE_NAME}:${TEMPLATES_IMAGE_TAG}
 
 include:
   - project: 'singletonsd/pipelines/common'
     file: '/src/.gitlab-ci-pages.yml'
 
 variables:
+  TEMPLATES_IMAGE_NAME: "registry.gitlab.com/singletonsd/docker/gitlab-ci-validator/alpine-3.9"
+  TEMPLATES_IMAGE_TAG: "latest"
   PAGES_SOURCE_FOLDER: "src/.g*"
 
 stages:

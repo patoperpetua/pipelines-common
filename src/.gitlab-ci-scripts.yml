@@ -1,6 +1,8 @@
-image: alpine:3.7
+image: ${SCRIPTS_IMAGE_NAME}:${SCRIPTS_IMAGE_TAG}
 
 variables:
+  SCRIPTS_IMAGE_NAME: "alpine"
+  SCRIPTS_IMAGE_TAG: "3.9"
   PAGES_TARGET_FOLDER: "public"
   PAGES_SOURCE_FOLDER: "src/*"
 
