@@ -19,6 +19,7 @@ pages:
     - rm -rf "${TARGET_FOLDER}"
     - mkdir -p "${TARGET_FOLDER}"
     - cp -r ${PAGES_SOURCE_FOLDER} "${TARGET_FOLDER}"
+    - ls -R public
   artifacts:
     paths:
       - public
