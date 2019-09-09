@@ -42,7 +42,7 @@ include:
     file: '/src/.gitlab-ci-templates.yml'
 ```
 
-Or using remote aproach over gitlab repo:
+Or using remote approach over gitlab repo:
 
 ```yaml
 include:
@@ -51,7 +51,7 @@ include:
   - remote: 'https://gitlab.com/singletonsd/pipelines/common/raw/master/src/.gitlab-ci-test-templates.yml'
 ```
 
-Or using remote aproach over gilab pages:
+Or using remote approach over gilab pages:
 
 ```yaml
 include:
@@ -69,7 +69,7 @@ include:
   - remote: 'https://singletonsd.gitlab.io/singletonsd/pipelines/common/feature-new/.gitlab-ci-test-${FILE}.yml'
 ```
 
-And also define the stages you want to use. It can be both or just one. Remember to include the one you want or main if you use both, like following:
+And also define the stages you want to use, like following:
 
 ```yaml
 # Pages
