@@ -109,6 +109,14 @@ Also you can download the script by:
 curl -o gitlab-ci_lint_test_standalone.sh -L https://singletonsd.gitlab.io/scripts/gitlab-ci/latest/gitlab-ci_lint_test_standalone.sh
 ```
 
+## GIT HOOK
+
+You can setup gitlab lint tester to be run before a commit. To do that just execute the following script under your git repository:
+
+```bash
+curl -s https://singletonsd.gitlab.io/scripts/gitlab-ci/latest/gitlab-ci_lint_hook_installer.sh | bash /dev/stdin
+```
+
 ## DOCUMENTATION
 
 - [Gitlab CI - Includes](https://docs.gitlab.com/ee/ci/yaml/)
